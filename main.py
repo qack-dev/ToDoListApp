@@ -1,97 +1,97 @@
 #!/usr/bin/env python3
-# -*- coding: shift-jis -*-
+# -*- coding: utf-8 -*-
 
-# ƒ^ƒXƒN‚ğŠi”[‚·‚é•Ï”
+# ã‚¿ã‚¹ã‚¯ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
 tasks = {}
-# ƒ^ƒXƒN‚ğ•Û‘¶‚·‚éƒtƒ@ƒCƒ‹–¼
+# ã‚¿ã‚¹ã‚¯ã‚’ä¿å­˜ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å
 tasks_file = 'tasks.txt'
 
-# ƒ^ƒXƒN‚ğ•Û‘¶‚·‚éŠÖ”
+# ã‚¿ã‚¹ã‚¯ã‚’ä¿å­˜ã™ã‚‹é–¢æ•°
 def save_tasks():
     global tasks
     try:
         with open(tasks_file, 'w') as f:
             f.write(f"{tasks}")
-        print("ƒ^ƒXƒN‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚µ‚½B")
+        print("ã‚¿ã‚¹ã‚¯ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã—ã¾ã—ãŸã€‚")
     except IOError as e:
-        print(f"ƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½: {e}")
+        print(f"ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ: {e}")
 
-# priority‚Ì“ü—Í‚ğ”»’f
+# priorityã®å…¥åŠ›ã‚’åˆ¤æ–­
 def is_priority():
     priority = input("priority: ")
     if priority in ['high', 'middle', 'low']:
         return priority
     else:
-        print("priority‚Í'high', 'middle', 'low'‚Ì‚¢‚¸‚ê‚©‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B")
+        print("priorityã¯'high', 'middle', 'low'ã®ã„ãšã‚Œã‹ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚")
         is_priority()
 
-# ƒ^ƒXƒN‚ğ’Ç‰Á‚·‚éŠÖ”
+# ã‚¿ã‚¹ã‚¯ã‚’è¿½åŠ ã™ã‚‹é–¢æ•°
 def add():
     global tasks
-    # ƒ^ƒXƒN‚Æ—Dæ“x‚Ì“ü—Í‚ğ‘£‚·
-    print('task–¼‚Æpriority(high, middle, low)‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B')
+    # ã‚¿ã‚¹ã‚¯ã¨å„ªå…ˆåº¦ã®å…¥åŠ›ã‚’ä¿ƒã™
+    print('taskåã¨priority(high, middle, low)ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚')
     task = input("task: ")
     priority = is_priority()
-    # ƒ^ƒXƒN’Ç‰Á
+    # ã‚¿ã‚¹ã‚¯è¿½åŠ 
     tasks[len(tasks)] = [task, priority]
     save_tasks()
 
-# ƒ^ƒXƒN‚ğíœEŠ®—¹‚·‚éŠÖ”‚Ì‹¤’Ê•”•ª‚ÌŠÖ”
+# ã‚¿ã‚¹ã‚¯ã‚’å‰Šé™¤ãƒ»å®Œäº†ã™ã‚‹é–¢æ•°ã®å…±é€šéƒ¨åˆ†ã®é–¢æ•°
 def delete():
     for i in range(3):
-        num = input("‚ ‚È‚½‚Í“ü—Í‚ğŒv2‰ñŠÔˆá‚¦‚ç‚ê‚Ü‚·B\n> ")
+        num = input("ã‚ãªãŸã¯å…¥åŠ›ã‚’è¨ˆ2å›é–“é•ãˆã‚‰ã‚Œã¾ã™ã€‚\n> ")
         try:
             num = int(num)
             if num in tasks:
                 del tasks[num]
-                print(f"ƒ^ƒXƒN {num} ‚ğíœ‚µ‚Ü‚µ‚½B")
+                print(f"ã‚¿ã‚¹ã‚¯ {num} ã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚")
                 save_tasks()
                 return
             else:
-                print("–³Œø‚Èƒ^ƒXƒN”Ô†‚Å‚·B")
+                print("ç„¡åŠ¹ãªã‚¿ã‚¹ã‚¯ç•ªå·ã§ã™ã€‚")
         except ValueError:
-            print("”’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B")
+            print("æ•°å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚")
 
-# ƒ^ƒXƒN‚ğíœ‚·‚éŠÖ”
+# ã‚¿ã‚¹ã‚¯ã‚’å‰Šé™¤ã™ã‚‹é–¢æ•°
 def remove():
     global tasks
     if not tasks:
-        print("íœ‚·‚éƒ^ƒXƒN‚ª‚ ‚è‚Ü‚¹‚ñB")
+        print("å‰Šé™¤ã™ã‚‹ã‚¿ã‚¹ã‚¯ãŒã‚ã‚Šã¾ã›ã‚“ã€‚")
         return
     show()
-    print("íœ‚·‚éƒ^ƒXƒN”Ô†‚ğ‘I‚ñ‚Å‚­‚¾‚³‚¢B")
+    print("å‰Šé™¤ã™ã‚‹ã‚¿ã‚¹ã‚¯ç•ªå·ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚")
     delete()
 
 def show():
     global tasks
     if not tasks:
-        print("ƒ^ƒXƒN‚Í‚ ‚è‚Ü‚¹‚ñB")
+        print("ã‚¿ã‚¹ã‚¯ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚")
     else:
-        print("Œ»İ‚Ìƒ^ƒXƒN:")
+        print("ç¾åœ¨ã®ã‚¿ã‚¹ã‚¯:")
         for key, value in tasks.items():
             print(f"    {key}: {value[0]} (priority: {value[1]})")
 
-# ƒ^ƒXƒN‚ğŠ®—¹‚·‚éŠÖ”
+# ã‚¿ã‚¹ã‚¯ã‚’å®Œäº†ã™ã‚‹é–¢æ•°
 def complete():
     global tasks
     if not tasks:
-        print("Š®—¹‚·‚éƒ^ƒXƒN‚ª‚ ‚è‚Ü‚¹‚ñB")
+        print("å®Œäº†ã™ã‚‹ã‚¿ã‚¹ã‚¯ãŒã‚ã‚Šã¾ã›ã‚“ã€‚")
         return
     show()
-    print("Š®—¹‚·‚éƒ^ƒXƒN”Ô†‚ğ‘I‚ñ‚Å‚­‚¾‚³‚¢B")
+    print("å®Œäº†ã™ã‚‹ã‚¿ã‚¹ã‚¯ç•ªå·ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚")
     delete()
 
 def main():
-    # ‚±‚ê‚©‚çƒOƒ[ƒoƒ‹•Ï”‚ğ•ÏX‚·‚é‚±‚Æ‚ğéŒ¾
+    # ã“ã‚Œã‹ã‚‰ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã‚’å¤‰æ›´ã™ã‚‹ã“ã¨ã‚’å®£è¨€
     global tasks
-    # ƒ^ƒXƒN‚ğ“Ç‚İ‚İ
+    # ã‚¿ã‚¹ã‚¯ã‚’èª­ã¿è¾¼ã¿
     with open(tasks_file, 'r') as f:
         tasks = f.read()
-    # ƒ^ƒXƒN‚ğ«‘‚É•ÏŠ·
+    # ã‚¿ã‚¹ã‚¯ã‚’è¾æ›¸ã«å¤‰æ›
     tasks = eval(tasks) if tasks else {}
-    # ‰ŠúƒƒbƒZ[ƒW
-    a = input('ƒ^ƒXƒN‚ğ“ü—Í:add,\nƒ^ƒXƒN‚ğíœ:remove,\nƒ^ƒXƒN‚ğ•\¦:show,\nƒ^ƒXƒN‚ğŠ®—¹:complete,\nI—¹:exit\n> ')
-    # ğŒ•ªŠò
+    # åˆæœŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+    a = input('ã‚¿ã‚¹ã‚¯ã‚’å…¥åŠ›:add,\nã‚¿ã‚¹ã‚¯ã‚’å‰Šé™¤:remove,\nã‚¿ã‚¹ã‚¯ã‚’è¡¨ç¤º:show,\nã‚¿ã‚¹ã‚¯ã‚’å®Œäº†:complete,\nçµ‚äº†:exit\n> ')
+    # æ¡ä»¶åˆ†å²
     match a:
         case 'add':
             add()
@@ -102,10 +102,10 @@ def main():
         case 'complete':
             complete()
         case 'exit':
-            print('I—¹‚µ‚Ü‚·B')
+            print('çµ‚äº†ã—ã¾ã™ã€‚')
             exit()
         case _:
-            print("–³Œø‚ÈƒRƒ}ƒ“ƒh‚Å‚·B'add', 'remove', 'show', 'complete', 'exit' ‚Ì‚¢‚¸‚ê‚©‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B")
+            print("ç„¡åŠ¹ãªã‚³ãƒãƒ³ãƒ‰ã§ã™ã€‚'add', 'remove', 'show', 'complete', 'exit' ã®ã„ãšã‚Œã‹ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚")
     main()
 
 if __name__ == '__main__':
