@@ -21,11 +21,10 @@ def save_tasks():
 # priorityの入力を判断
 def is_priority():
     priority = input("priority: ")
-    if priority in ['high', 'middle', 'low']:
-        return priority
-    else:
+    while not priority in ['high', 'middle', 'low']:
         print("priorityは'high', 'middle', 'low'のいずれかを入力してください。")
-        is_priority()
+        priority = input("priority: ")
+    return priority
 
 # タスクを追加する関数
 def add():
