@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import json
+
 # タスクを格納する変数
 tasks = {}
 # タスクを保存するファイル名
-tasks_file = 'tasks.txt'
+tasks_file = 'tasks.json'
 
 # タスクを保存する関数
 def save_tasks():
     global tasks
     try:
-        with open(tasks_file, 'w') as f:
-            f.write(f"{tasks}")
+        with open(tasks_file, 'w', encoding='utf-8') as f:
+            json.dump(tasks, f, ensure_ascii=False, indent=4)
         print("タスクをファイルに保存しました。")
     except IOError as e:
         print(f"ファイルの保存に失敗しました: {e}")
@@ -85,10 +87,11 @@ def main():
     # これからグローバル変数を変更することを宣言
     global tasks
     # タスクを読み込み
-    with open(tasks_file, 'r') as f:
-        tasks = f.read()
-    # タスクを辞書に変換
-    tasks = eval(tasks) if tasks else {}
+    # eval() から json.loads()へ変更
+    with open(tasks_file, 'r', encoding='utf-8') as f:
+        # keyを整数に変換
+        loaded_tasks = json.load(f)
+        tasks = {int(k): v for k, v in loaded_tasks.items()}
     # 初期メッセージ
     a = input('タスクを入力:add,\nタスクを削除:remove,\nタスクを表示:show,\nタスクを完了:complete,\n終了:exit\n> ')
     # 条件分岐
