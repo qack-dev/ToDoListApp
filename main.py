@@ -92,24 +92,25 @@ def main():
         # keyを整数に変換
         loaded_tasks = json.load(f)
         tasks = {int(k): v for k, v in loaded_tasks.items()}
-    # 初期メッセージ
-    a = input('タスクを入力:add,\nタスクを削除:remove,\nタスクを表示:show,\nタスクを完了:complete,\n終了:exit\n> ')
-    # 条件分岐
-    match a:
-        case 'add':
-            add()
-        case 'remove':
-            remove()
-        case 'show':
-            show()
-        case 'complete':
-            complete()
-        case 'exit':
-            print('終了します。')
-            exit()
-        case _:
-            print("無効なコマンドです。'add', 'remove', 'show', 'complete', 'exit' のいずれかを入力してください。")
-    main()
+    # ループ処理
+    while True:
+        # 初期メッセージ
+        a = input('タスクを入力:add,\nタスクを削除:remove,\nタスクを表示:show,\nタスクを完了:complete,\n終了:exit\n> ')
+        # 条件分岐
+        match a:
+            case 'add':
+                add()
+            case 'remove':
+                remove()
+            case 'show':
+                show()
+            case 'complete':
+                complete()
+            case 'exit':
+                print('終了します。')
+                break
+            case _:
+                print("無効なコマンドです。'add', 'remove', 'show', 'complete', 'exit' のいずれかを入力してください。")
 
 if __name__ == '__main__':
 	main()
