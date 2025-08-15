@@ -40,13 +40,20 @@ def add():
 
 # タスクを削除・完了する関数の共通部分の関数
 def delete():
+    global tasks
     for i in range(3):
         num = input("あなたは入力を計2回間違えられます。\n> ")
         try:
             num = int(num)
             if num in tasks:
                 del tasks[num]
-                print(f"タスク {num} を削除しました。")
+                # 残ったタスクの値をlistとして取得
+                remaining_tasks_values = list(tasks.values())
+                # tasksのキーを再設定
+                tasks = {}
+                for v in remaining_tasks_values:
+                    tasks[len(tasks)] = v
+                print(f"タスク {num} を削除し、番号を採番し直しました。")
                 save_tasks()
                 return
             else:
